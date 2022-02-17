@@ -1,26 +1,26 @@
+require("dotenv").config()
+
 const express = require('express')
 const morgan = require('morgan')
+const cors = require('cors')
 const mongoose = require('mongoose')
+const path = require('path')
 
 const app = express()
 
-// Database setup
+ // Database setup
 mongoose.connect('mongodb+srv://sistemaupload:sistemaupload@cluster0.db2nz.mongodb.net/upload?retryWrites=true&w=majority',() => {
 	console.log('Mongo conectado')
-})
+}) 
 
+app.use(cors())
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use(morgan('dev'))
+app.use('/file', express.static(path.resolve(__dirname, '..','temp','uploads')))
 
 app.use(require('./routes.js'))
 
 app.listen(3000, (req,res) => {
 	console.log('Servidor rodando')
 })
-
-//mongodb+srv://sistemaupload:<password>@cluster0.db2nz.mongodb.net/myFirstDatabase?retryWrites=true&w=majority
-//user: sistemaupload
-//senha: sistemaupload
-
-//mongodb+srv://sistemaupload:<password>@cluster0.db2nz.mongodb.net/myFirstDatabase?retryWrites=true&w=majority
