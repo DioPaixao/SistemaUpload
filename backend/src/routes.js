@@ -11,13 +11,13 @@ routes.get('/posts', async (req,res) => {
 	return res.json(posts)
 })
 
-routes.delete('/posts/:id', async (req,res) => {
-	const { id } = req.params
-
-	const posts = await Post.findByIdAndDelete({ _id: id })
-
-	return res.json(posts)
-})
+routes.delete("/posts/:id", async (req, res) => {
+	const post = await Post.findById(req.params.id);
+  
+	await post.remove();
+  
+	return res.send(post);
+});
 
 routes.post('/posts', multer(multerConfig).single('file'), async(req,res) => {
 	const { originalname: name, size, key, location: url = '' } = req.file

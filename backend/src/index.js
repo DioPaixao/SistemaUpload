@@ -9,7 +9,7 @@ const path = require('path')
 const app = express()
 
  // Database setup
-mongoose.connect('mongodb+srv://sistemaupload:sistemaupload@cluster0.db2nz.mongodb.net/upload?retryWrites=true&w=majority',() => {
+mongoose.connect(process.env.MONGO_URL,() => {
 	console.log('Mongo conectado')
 }) 
 
