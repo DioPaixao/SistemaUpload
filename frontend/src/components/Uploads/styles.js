@@ -18,3 +18,17 @@ export const DropContainer = styled.div.attrs({
 	${props => props.isDragActive && dragActive};
 	${props => props.isDragReject && dragReject};
   `;
+
+const messageColors = {
+	default: "#999",
+	error: "#e57878",
+	success: "#78e5d5"
+  };
+  
+export const UploadMessage = styled.p`
+display: flex;
+color: ${props => messageColors[props.type || "default"]};
+justify-content: center;
+align-items: center;
+padding: 15px 0;
+`;  
